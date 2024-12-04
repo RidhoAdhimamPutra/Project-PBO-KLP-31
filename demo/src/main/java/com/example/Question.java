@@ -10,9 +10,21 @@ public class Question {
     private String opsiE;
     private String jawaban;
 
+    // Konstruktor dengan id
     public Question(int id, String bunyiSoal, String opsiA, String opsiB, String opsiC, String opsiD, String opsiE,
-            String jawaban) {
+                    String jawaban) {
         this.id = id;
+        this.bunyiSoal = bunyiSoal;
+        this.opsiA = opsiA;
+        this.opsiB = opsiB;
+        this.opsiC = opsiC;
+        this.opsiD = opsiD;
+        this.opsiE = opsiE;
+        this.jawaban = jawaban;
+    }
+
+    // Konstruktor tanpa id
+    public Question(String bunyiSoal, String opsiA, String opsiB, String opsiC, String opsiD, String opsiE, String jawaban) {
         this.bunyiSoal = bunyiSoal;
         this.opsiA = opsiA;
         this.opsiB = opsiB;

@@ -74,7 +74,8 @@ public class Appquiz {
             @Override
             public void actionPerformed(ActionEvent e) {
                 quizFrame.remove(imageLabel);
-                quizFrame.add(createQuizPanel(), BorderLayout.CENTER);
+                List<Question> questions = fetchQuestionsFromDatabase();
+                quizFrame.add(new QuizPanel(questions), BorderLayout.CENTER);
                 quizFrame.revalidate();
                 quizFrame.repaint();
             }
