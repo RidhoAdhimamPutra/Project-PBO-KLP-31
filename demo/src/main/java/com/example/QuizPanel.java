@@ -32,22 +32,23 @@ public class QuizPanel extends JPanel {
 
         // Title untuk pertanyaan
         JLabel questionTitle = new JLabel("Question");
-        questionTitle.setFont(new Font("Arial", Font.BOLD, 60)); // Atur font dan ukuran teks
+        questionTitle.setFont(new Font("Impact", Font.BOLD, 60)); // Atur font dan ukuran teks
         questionTitle.setForeground(Color.orange); // Atur warna teks
         questionTitle.setBounds(600, 150, 300, 50); // Posisi dan ukuran label
         imgLabel.add(questionTitle); // Tambahkan ke imgLabel
 
         // Panel untuk pertanyaan
-        RoundedPanel questionPanel = new RoundedPanel(20);
-        questionPanel.setBackground(Color.LIGHT_GRAY);
-        questionPanel.setOpaque(true); // Pastikan panel terlihat di atas latar belakang
-        questionPanel.setBounds(320, 250, 800, 400); // Atur posisi dan ukuran panel
-        questionPanel.setLayout(null); // Nonaktifkan layout manager panel soal
+        RoundedPanel questionPanel = new RoundedPanel(50);
+        questionPanel.setBackground(Color.white);
+        questionPanel.setOpacity(0.7f); // Atur opasitas ke 70%
+        questionPanel.setBounds(320, 250, 800, 400);
+        questionPanel.setLayout(null);
+
 
         // Tampilkan soal pertama
         Question currentQuestion = questions.get(currentQuestionIndex);
         JLabel questionText = new JLabel(currentQuestion.getBunyiSoal());
-        questionText.setFont(new Font("Arial", Font.PLAIN, 30));
+        questionText.setFont(new Font("Serif", Font.PLAIN, 30));
         questionText.setBounds(10, 10, 780, 50); // Atur posisi dan ukuran teks soal
         questionPanel.add(questionText);
 
