@@ -19,6 +19,6 @@ public class LeaderboardEntry {
 
     @Override
     public String toString() {
-        return String.format("%-20s : %5d", playerName, score); // Align player name and score
+        return String.format("%-20s : %5d", playerName, score);
     }
 }

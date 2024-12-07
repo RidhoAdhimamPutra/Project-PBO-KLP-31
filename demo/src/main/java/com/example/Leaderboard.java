@@ -33,7 +33,6 @@ public class Leaderboard extends JPanel {
 
         add(leaderboardPanel);
 
-        // Restart and Exit buttons
         JButton restartButton = new JButton("Restart");
         restartButton.setBounds(520, 750, 150, 40);
         restartButton.addActionListener(e -> {
@@ -48,30 +47,25 @@ public class Leaderboard extends JPanel {
     }
 
     public static void main(String[] args) {
-        // Frame utama
         JFrame frame = new JFrame("Quiz Application");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1440, 900);
         frame.setLayout(new BorderLayout());
 
-        // Layar ucapan terima kasih
         JPanel thankYouPanel = new JPanel(null);
 
-        // Tambahkan background ucapan terima kasih
         ImageIcon bgIcon = new ImageIcon("demo/src/main/resources/terimakasih.png");
         Image bgImage = bgIcon.getImage().getScaledInstance(1440, 900, Image.SCALE_SMOOTH);
         JLabel bgLabel = new JLabel(new ImageIcon(bgImage));
         bgLabel.setBounds(0, 0, 1440, 900);
         thankYouPanel.add(bgLabel);
 
-        // Tambahkan tombol untuk menuju leaderboard
         JButton leaderboardButton = new JButton(new ImageIcon("demo/src/main/resources/End.png"));
         leaderboardButton.setBorderPainted(false);
         leaderboardButton.setContentAreaFilled(false);
         leaderboardButton.setFocusPainted(false);
         leaderboardButton.setBounds(620, 500, 200, 200);
         leaderboardButton.addActionListener(e -> {
-            // Ganti ke layar leaderboard
             frame.getContentPane().removeAll();
             List<LeaderboardEntry> entries = new ArrayList<>();
             entries.add(new LeaderboardEntry("Alice", 95));
@@ -84,7 +78,6 @@ public class Leaderboard extends JPanel {
         });
         bgLabel.add(leaderboardButton);
 
-        // Tambahkan panel ucapan terima kasih ke frame
         frame.add(thankYouPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }

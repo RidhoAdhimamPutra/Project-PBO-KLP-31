@@ -1,6 +1,9 @@
 package com.example;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.BorderUIResource.EmptyBorderUIResource;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,9 +59,10 @@ public class Appquiz {
 
         JButton startButton = new JButton(new ImageIcon("demo/src/main/resources/playbutton.png"));
         startButton.setBorderPainted(false);
-        startButton.setContentAreaFilled(true);
+        startButton.setContentAreaFilled(false);
         startButton.setFocusPainted(false);
-        startButton.setPreferredSize(new Dimension(800, 600));
+        startButton.setPreferredSize(new Dimension(200, 100));
+        startButton.setBorder(new EmptyBorder(80, 40, 10, 40));
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);

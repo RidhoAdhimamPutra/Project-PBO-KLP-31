@@ -33,17 +33,15 @@ public class Login {
             }
         };
         backgroundPanel.setBounds(0, 0, 800, 600);
-        backgroundPanel.setLayout(null); // Menggunakan layout manual
+        backgroundPanel.setLayout(null);
         frame.add(backgroundPanel);
 
-        // Menambahkan label "Who Are You?"
         JLabel titleLabel = new JLabel("WHO ARE YOU?");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 40));
         titleLabel.setForeground(Color.BLACK);
-        titleLabel.setBounds(250, 100, 400, 50); // Atur posisi dan ukuran
+        titleLabel.setBounds(250, 100, 400, 50);
         backgroundPanel.add(titleLabel);
 
-        // Menambahkan label username
         JLabel usernameLabel = new JLabel("Username:");
         usernameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         usernameLabel.setForeground(Color.BLACK);
