@@ -1,7 +1,17 @@
 package com.example;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class Login {
     public static void main(String[] args) {
@@ -13,7 +23,7 @@ public class Login {
 
         // Menambahkan panel latar belakang
         JPanel backgroundPanel = new JPanel() {
-            private Image backgroundImage = new ImageIcon("D:\\Perkuliahan\\SEMESTER5\\PraktikumPBO\\Project PBO\\Project-PBO-KLP-31\\demo\\target\\classes\\4.png").getImage();
+            private Image backgroundImage = new ImageIcon("demo/src/main/resources/4.png").getImage();
 
             @Override
             protected void paintComponent(Graphics g) {
