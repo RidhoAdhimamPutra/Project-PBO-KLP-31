@@ -56,7 +56,7 @@ public class Appquiz {
 
         JButton startButton = new JButton(new ImageIcon("demo/src/main/resources/playbutton.png"));
         startButton.setBorderPainted(false);
-        startButton.setContentAreaFilled(false);
+        startButton.setContentAreaFilled(true);
         startButton.setFocusPainted(false);
         startButton.setPreferredSize(new Dimension(800, 600));
 

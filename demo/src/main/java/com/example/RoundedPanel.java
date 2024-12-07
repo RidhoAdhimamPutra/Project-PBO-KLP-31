@@ -34,7 +34,7 @@ class RoundedPanel extends JPanel {
         // Gambar panel bundar
         g2.setColor(getBackground());
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), cornerRadius, cornerRadius);
-        
+
         // Kembalikan komposisi ke default
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 
