@@ -1,17 +1,21 @@
 package com.example;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
 
 public class QuizPanel extends JPanel {
     private List<Question> questions;
@@ -138,8 +142,37 @@ public class QuizPanel extends JPanel {
     }
 
     private void showResult() {
+        // Tampilkan hasil kuis
         JOptionPane.showMessageDialog(this,
                 "Hasil Kuis:\nBenar: " + correctAnswers + "\nSalah: " + incorrectAnswers,
                 "Hasil Akhir", JOptionPane.INFORMATION_MESSAGE);
-    }
+    
+        // Menutup frame QuizPanel sebelum membuka leaderboard
+        JFrame topLevelFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (topLevelFrame != null) {
+            topLevelFrame.dispose(); // Menutup QuizPanel
+        }
+    
+        // Membuka leaderboard setelah menekan OK
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Leaderboard");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1440, 900);
+            frame.setLayout(new BorderLayout());
+    
+            // Buat daftar leaderboard
+            List<LeaderboardEntry> entries = new ArrayList<>();
+            entries.add(new LeaderboardEntry("Alice", 95));
+            entries.add(new LeaderboardEntry("Bob", 88));
+            entries.add(new LeaderboardEntry("Charlie", 76));
+            entries.add(new LeaderboardEntry("Diana", 60));
+    
+            // Menampilkan leaderboard
+            frame.add(new Leaderboard(entries));
+            frame.setVisible(true);
+            frame.setLocationRelativeTo(null); // Agar berada di tengah layar
+        });
+    }    
+    
 }
+
