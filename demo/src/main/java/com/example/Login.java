@@ -31,6 +31,22 @@ public class Login {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
 
+    private static String currentName;
+    private static String currentNIM;
+
+    public static void setCurrentUser(String name, String nim) {
+        currentName = name;
+        currentNIM = nim;
+    }
+
+    public static String getCurrentName() {
+        return currentName;
+    }
+
+    public static String getCurrentNIM() {
+        return currentNIM;
+    }
+
     private List<Question> fetchQuestionsFromDatabase() {
         List<Question> questions = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -135,13 +151,17 @@ public class Login {
                 String nim = nimField.getText();
 
                 if (name.isEmpty() || nim.isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, "Silahkan Masukkan Nama dan NIM.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "Silahkan Masukkan Nama dan NIM.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 } else {
-                     // Tutup frame Login
+                    // Simpan nama pengguna
+                    Login.setCurrentUser(name, nim);
+
+                    // Tutup frame Login
                     JFrame loginFrame = (JFrame) SwingUtilities.getWindowAncestor(loginButton);
                     loginFrame.dispose();
-        
-                    // Buat frame baru untuk QuizPanel
+
+                    // Lanjutkan ke frame kuis
                     JFrame quizFrame = new JFrame("Quiz Panel");
                     quizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     quizFrame.setSize(1440, 900);

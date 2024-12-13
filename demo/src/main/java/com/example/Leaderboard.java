@@ -6,21 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Leaderboard extends JPanel {
+    private Image backgroundImage;
+
     public Leaderboard(List<LeaderboardEntry> entries) {
+        backgroundImage = new ImageIcon("demo/src/main/resources/iqscore.png").getImage();
+
         setLayout(null);
 
-        // Title
-        JLabel title = new JLabel("Leaderboard");
-        title.setFont(new Font("Arial", Font.BOLD, 80));
-        title.setForeground(Color.ORANGE);
-        title.setHorizontalAlignment(SwingConstants.CENTER);
-        title.setBounds(0, 50, 1440, 100);
-        add(title);
-
-        // Panel for leaderboard entries
         JPanel leaderboardPanel = new JPanel(new GridLayout(entries.size(), 1, 10, 10));
-        leaderboardPanel.setBounds(320, 200, 800, 500);
-        leaderboardPanel.setBackground(Color.WHITE);
+        leaderboardPanel.setBounds(520, 300, 400, 200);
+        leaderboardPanel.setBackground(Color.white);
+        leaderboardPanel.setOpaque(false);
 
         // Adding entries
         for (LeaderboardEntry entry : entries) {
@@ -36,14 +32,25 @@ public class Leaderboard extends JPanel {
         JButton restartButton = new JButton("Restart");
         restartButton.setBounds(520, 750, 150, 40);
         restartButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Restarting...", "Info", JOptionPane.INFORMATION_MESSAGE);
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            parentFrame.dispose();
+
+            Appquiz appquiz = new Appquiz();
+            appquiz.startQuiz(); // Kembali ke layar awal
         });
+
         add(restartButton);
 
         JButton exitButton = new JButton("Exit");
         exitButton.setBounds(770, 750, 150, 40);
         exitButton.addActionListener(e -> System.exit(0));
         add(exitButton);
+
+    }
+
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 
     public static void main(String[] args) {
@@ -59,6 +66,9 @@ public class Leaderboard extends JPanel {
         JLabel bgLabel = new JLabel(new ImageIcon(bgImage));
         bgLabel.setBounds(0, 0, 1440, 900);
         thankYouPanel.add(bgLabel);
+        List<LeaderboardEntry> entries = new ArrayList<>();
+        entries.add(new LeaderboardEntry("John Doe", 80));
+        entries.add(new LeaderboardEntry("John Doe", 80));
 
         JButton leaderboardButton = new JButton(new ImageIcon("demo/src/main/resources/End.png"));
         leaderboardButton.setBorderPainted(false);
@@ -67,15 +77,12 @@ public class Leaderboard extends JPanel {
         leaderboardButton.setBounds(620, 500, 200, 200);
         leaderboardButton.addActionListener(e -> {
             frame.getContentPane().removeAll();
-            List<LeaderboardEntry> entries = new ArrayList<>();
-            entries.add(new LeaderboardEntry("Alice", 95));
-            entries.add(new LeaderboardEntry("Bob", 88));
-            entries.add(new LeaderboardEntry("Charlie", 76));
-            entries.add(new LeaderboardEntry("Diana", 60));
+            frame.add(new Leaderboard(Appquiz.leaderboardEntries));
             frame.add(new Leaderboard(entries));
             frame.revalidate();
             frame.repaint();
         });
+
         bgLabel.add(leaderboardButton);
 
         frame.add(thankYouPanel, BorderLayout.CENTER);

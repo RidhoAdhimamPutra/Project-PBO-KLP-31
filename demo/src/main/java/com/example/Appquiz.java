@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Appquiz {
+    public static List<LeaderboardEntry> leaderboardEntries = new ArrayList<>();
+
     public void startQuiz() {
         JFrame quizFrame = new JFrame("Kuis IQ");
         quizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +29,7 @@ public class Appquiz {
         startButton.setBorderPainted(false);
         startButton.setContentAreaFilled(false);
         startButton.setFocusPainted(false);
-        startButton.setPreferredSize(new Dimension(200, 100));
+        startButton.setPreferredSize(new Dimension(200, 200));
         startButton.setBorder(new EmptyBorder(80, 40, 10, 40));
 
         JPanel buttonPanel = new JPanel();

@@ -24,9 +24,12 @@ public class QuizPanel extends JPanel {
     private int incorrectAnswers = 0;
     private ButtonGroup buttonGroup;
     private JLabel questionText;
+    private AudioPlayer audioPlayer;
 
     public QuizPanel(List<Question> questions) {
         this.questions = questions;
+        audioPlayer = new AudioPlayer();
+        audioPlayer.play("demo/src/main/resources/brain.wav"); // Mulai memutar lagu
 
         // Nonaktifkan layout manager
         setLayout(null);
@@ -96,11 +99,16 @@ public class QuizPanel extends JPanel {
 
             // Ambil jawaban user
             String selectedAnswer = "";
-            if (opsiA.isSelected()) selectedAnswer = "A";
-            else if (opsiB.isSelected()) selectedAnswer = "B";
-            else if (opsiC.isSelected()) selectedAnswer = "C";
-            else if (opsiD.isSelected()) selectedAnswer = "D";
-            else if (opsiE.isSelected()) selectedAnswer = "E";
+            if (opsiA.isSelected())
+                selectedAnswer = "A";
+            else if (opsiB.isSelected())
+                selectedAnswer = "B";
+            else if (opsiC.isSelected())
+                selectedAnswer = "C";
+            else if (opsiD.isSelected())
+                selectedAnswer = "D";
+            else if (opsiE.isSelected())
+                selectedAnswer = "E";
 
             // Cek jawaban
             Question currentQuestion = questions.get(currentQuestionIndex);
@@ -127,7 +135,7 @@ public class QuizPanel extends JPanel {
     }
 
     private void updateQuestion(JPanel questionPanel, JRadioButton opsiA, JRadioButton opsiB, JRadioButton opsiC,
-                                JRadioButton opsiD, JRadioButton opsiE) {
+            JRadioButton opsiD, JRadioButton opsiE) {
         Question currentQuestion = questions.get(currentQuestionIndex);
         questionText.setText(currentQuestion.getBunyiSoal());
         opsiA.setText("A. " + currentQuestion.getOpsiA());
@@ -146,33 +154,30 @@ public class QuizPanel extends JPanel {
         JOptionPane.showMessageDialog(this,
                 "Hasil Kuis:\nBenar: " + correctAnswers + "\nSalah: " + incorrectAnswers,
                 "Hasil Akhir", JOptionPane.INFORMATION_MESSAGE);
-    
+        audioPlayer.stop();
+
         // Menutup frame QuizPanel sebelum membuka leaderboard
         JFrame topLevelFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (topLevelFrame != null) {
             topLevelFrame.dispose(); // Menutup QuizPanel
         }
-    
+
         // Membuka leaderboard setelah menekan OK
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Leaderboard");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(1440, 900);
             frame.setLayout(new BorderLayout());
-    
+
             // Buat daftar leaderboard
             List<LeaderboardEntry> entries = new ArrayList<>();
-            entries.add(new LeaderboardEntry("Alice", 95));
-            entries.add(new LeaderboardEntry("Bob", 88));
-            entries.add(new LeaderboardEntry("Charlie", 76));
-            entries.add(new LeaderboardEntry("Diana", 60));
-    
+            entries.add(new LeaderboardEntry(Login.getCurrentName(), correctAnswers)); // Menambahkan nama yang diinput
+
             // Menampilkan leaderboard
             frame.add(new Leaderboard(entries));
             frame.setVisible(true);
             frame.setLocationRelativeTo(null); // Agar berada di tengah layar
         });
-    }    
-    
-}
+    }
 
+}
