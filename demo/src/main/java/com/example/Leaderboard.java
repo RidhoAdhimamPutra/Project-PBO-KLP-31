@@ -1,12 +1,10 @@
 package com.example;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -64,39 +62,5 @@ public class Leaderboard extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Quiz Application");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1440, 900);
-        frame.setLayout(new BorderLayout());
-
-        JPanel thankYouPanel = new JPanel(null);
-
-        ImageIcon bgIcon = new ImageIcon("demo/src/main/resources/terimakasih.png");
-        Image bgImage = bgIcon.getImage().getScaledInstance(1440, 900, Image.SCALE_SMOOTH);
-        JLabel bgLabel = new JLabel(new ImageIcon(bgImage));
-        bgLabel.setBounds(0, 0, 1440, 900);
-        thankYouPanel.add(bgLabel);
-        List<LeaderboardEntry> entries = new ArrayList<>();
-
-        JButton leaderboardButton = new JButton(new ImageIcon("demo/src/main/resources/End.png"));
-        leaderboardButton.setBorderPainted(false);
-        leaderboardButton.setContentAreaFilled(false);
-        leaderboardButton.setFocusPainted(false);
-        leaderboardButton.setBounds(620, 500, 200, 200);
-        leaderboardButton.addActionListener(e -> {
-            frame.getContentPane().removeAll();
-            frame.add(new Leaderboard(Appquiz.leaderboardEntries));
-            frame.add(new Leaderboard(entries));
-            frame.revalidate();
-            frame.repaint();
-        });
-
-        bgLabel.add(leaderboardButton);
-
-        frame.add(thankYouPanel, BorderLayout.CENTER);
-        frame.setVisible(true);
     }
 }
