@@ -1,9 +1,22 @@
 package com.example;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 public class Leaderboard extends JPanel {
     private Image backgroundImage;
@@ -67,8 +80,6 @@ public class Leaderboard extends JPanel {
         bgLabel.setBounds(0, 0, 1440, 900);
         thankYouPanel.add(bgLabel);
         List<LeaderboardEntry> entries = new ArrayList<>();
-        entries.add(new LeaderboardEntry("John Doe", 80));
-        entries.add(new LeaderboardEntry("John Doe", 80));
 
         JButton leaderboardButton = new JButton(new ImageIcon("demo/src/main/resources/End.png"));
         leaderboardButton.setBorderPainted(false);

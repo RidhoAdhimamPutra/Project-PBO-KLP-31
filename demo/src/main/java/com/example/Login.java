@@ -149,31 +149,56 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 String name = nameField.getText();
                 String nim = nimField.getText();
-
+        
                 if (name.isEmpty() || nim.isEmpty()) {
                     JOptionPane.showMessageDialog(frame, "Silahkan Masukkan Nama dan NIM.", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
                     // Simpan nama pengguna
                     Login.setCurrentUser(name, nim);
-
+        
+                    // Cek apakah pengguna sudah ada di database
+                    try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+                        // Cek apakah pengguna sudah ada
+                        String checkSql = "SELECT COUNT(*) FROM users WHERE nim = ?";
+                        try (PreparedStatement checkStatement = connection.prepareStatement(checkSql)) {
+                            checkStatement.setString(1, nim);
+                            ResultSet resultSet = checkStatement.executeQuery();
+                            resultSet.next();
+                            int count = resultSet.getInt(1);
+        
+                            if (count == 0) { // Jika pengguna belum ada, simpan pengguna baru
+                                String insertSql = "INSERT INTO users (name, nim, iq) VALUES (?, ?, ?)";
+                                try (PreparedStatement insertStatement = connection.prepareStatement(insertSql)) {
+                                    insertStatement.setString(1, name);
+                                    insertStatement.setString(2, nim);
+                                    insertStatement.setInt(3, 100); // Nilai IQ default, bisa diubah sesuai kebutuhan
+                                    insertStatement.executeUpdate();
+                                }
+                            }
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+        
                     // Tutup frame Login
                     JFrame loginFrame = (JFrame) SwingUtilities.getWindowAncestor(loginButton);
                     loginFrame.dispose();
-
+        
                     // Lanjutkan ke frame kuis
                     JFrame quizFrame = new JFrame("Quiz Panel");
                     quizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     quizFrame.setSize(1440, 900);
-
+        
                     List<Question> questions = fetchQuestionsFromDatabase(); // Ambil data soal dari DB
                     QuizPanel quizPanel = new QuizPanel(questions);
                     quizFrame.add(quizPanel);
-
+        
                     quizFrame.setVisible(true);
                 }
             }
         });
+        
 
         // Tambahkan formPanel ke backgroundPanel
         backgroundPanel.add(formPanel);
