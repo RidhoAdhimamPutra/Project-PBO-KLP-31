@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,7 +34,7 @@ public class QuizPanel extends JPanel {
     private final ButtonGroup buttonGroup;
     private final JLabel questionText;
     private final AudioPlayer audioPlayer;
-    private int remainingTime = 60; // Waktu dalam detik 
+    private int remainingTime = 1800; // Waktu dalam detik 
     private final JLabel timerLabel;
 
     public QuizPanel(List<Question> questions) {
@@ -73,14 +74,14 @@ public class QuizPanel extends JPanel {
         RoundedPanel questionPanel = new RoundedPanel(50);
         questionPanel.setBackground(Color.white);
         questionPanel.setOpacity(0.7f);
-        questionPanel.setBounds(320, 250, 800, 400);
+        questionPanel.setBounds(100, 250, 1200, 400);
         questionPanel.setLayout(null);
         imgLabel.add(questionPanel);
 
         // Tambahkan komponen ke panel
         questionText = new JLabel();
         questionText.setFont(new Font("Serif", Font.PLAIN, 30));
-        questionText.setBounds(10, 10, 780, 50);
+        questionText.setBounds(10, 10, 1100, 50);
         questionPanel.add(questionText);
 
         // RadioButton untuk opsi
@@ -277,5 +278,5 @@ private List<LeaderboardEntry> fetchEntriesFromDatabase() {
         int seconds = totalSeconds % 60;
         return String.format("%02d:%02d", minutes, seconds);
     }
-    }
+}
     
